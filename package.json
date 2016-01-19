@@ -1,0 +1,28 @@
+{
+  "name": "node-xlsx-stream-reader",
+  "version": "0.0.1",
+  "description": "Memory efficinet non-blocking/event based streaming XLSX reader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daspawn/node-xlsx-stream-reader.git"
+  },
+  "engines": {
+      "node": ">= 0.10.0"
+    },
+  "keywords": [
+   "xlsx",
+   "reader",
+   "stream",
+   "simple"
+  ],
+  "author": "Brian Taber <btaber@diversecg.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daspawn/node-xlsx-stream-reader/issues"
+  },
+  "homepage": "https://github.com/daspawn/node-xlsx-stream-reader#readme"
+}
