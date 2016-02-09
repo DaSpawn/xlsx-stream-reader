@@ -38,7 +38,11 @@ workBookReader.on('worksheet', function (workSheetReader) {
         if (row.attributes.r == 1){
             // do something with row 1 like save as column names
         }else{
-            // do something with remaining rows
+            // second param to forEach colNum is very important as
+            // null columns are not defined in the array, ie sparse array
+            row.values.forEach(function(rowVal, colNum){
+                // do something with row values
+            });
         }
     });
     workSheetReader.on('end', function () {
@@ -114,7 +118,7 @@ can `pipe()` your input stream into the reader to begin processing
 
 #### Event: 'error'
 
-* {Error Object}
+* `error` {Error Object}
 
 Emitted if there was an error in processing (may not catch all errors, 
 some may be thrown depending on where the error happened)
@@ -126,16 +130,16 @@ Emmitted once the XLSX zip parser has closed and all sheets have been processed
 #### Event: 'sharedStrings'
 
 After the workbook shared strings have been parsed this event is emmited. Shared strings 
-are available via {Array} `workBookReader.workBookSharedStrings`.  
+are available via array `workBookReader.workBookSharedStrings`.
 
 #### Event: 'styles'
 
 After the workbook styles have been parsed this event is emmited. Styles are available 
-via {Array} `workBookReader.workBookStyles`
+via array `workBookReader.workBookStyles`
 
 #### Event: 'worksheet'
 
-* `options` {Object} XlsxStreamReaderWorkSheet object (workSheetReader)
+* `workSheetReader` {Object} XlsxStreamReaderWorkSheet object
 
 Emmitted when a worksheet is reached. The sheet number is availble via 
 {Number} `workSheetReader.id`. You can either process or skip at this point, 
@@ -152,10 +156,17 @@ available via {Number} `workSheetReader.rowCount`
 
 #### Worksheet Event: 'row'
 
-* `options` {Object} Row object
+* `row` {Object} Row object
 
 Emmitted on every row encountered in the worksheet. for more details on what 
-is in the row object, see the [Row class][msdnRows] on MSDN.
+is in the row object, see the [Row class][msdnRows] on MSDN.  
+
+For example:
+* `row.values`: sparse array containing all cell values
+* `row.attributes.r`: row index
+* `row.attributes.ht`: Row height measured in point size
+* `row.attributes.customFormat`: '1' if the row style should be applied.
+* `row.attributes.hidden`: '1' if the row is hidden
 
 
 References
