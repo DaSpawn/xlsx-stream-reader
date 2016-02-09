@@ -96,6 +96,8 @@ zip format that requires having the entire file to read the archive contents pro
 but still probably better to save temp first and read streasm from there.
 
 
+API Information
+-----------
 #### new XlsxStreamReader()
 
 Create a new XlsxStreamReader object (workBookReader). After attaching handlers you 
@@ -132,12 +134,12 @@ but you must do one for the processing to the next sheet to continue/finish.
 
 Once event is recieved you can attach worksheet on handlers (end, row) then you 
 would `workSheetReader.process()`. If you do not want to process a sheet and instead 
-want to skip entirely, you would `workSheetReader.skip()` without attaching any handlers
+want to skip entirely, you would `workSheetReader.skip()` without attaching any handlers.
 
 #### Worksheet Event: 'end'
 
 Emmitted once the end of the worksheet has been reached. The row count is 
-availbale via {Number} `workSheetReader.rowCount`
+available via {Number} `workSheetReader.rowCount`
 
 #### Worksheet Event: 'row'
 
@@ -149,23 +151,25 @@ is in the row object, see the [Row class][msdnRows] on MSDN.
 
 References
 -----------
-[Working with sheets (Open XML SDK)][msdnSheets]
-[Row class][msdnRows]
-[ExcelJS][ExcelJS]
+* [Working with sheets (Open XML SDK)][msdnSheets]
+* [Row class][msdnRows]
+* [ExcelJS][ExcelJS]
 
 
 Used Modules
 -----------
-[Path][modPath]
-[Util][modUtil]
-[Stream][modStream]
-[Sax][modSax]
-[Unzip2][modUnzip2]
+* [Path][modPath]
+* [Util][modUtil]
+* [Stream][modStream]
+* [Sax][modSax]
+* [Unzip2][modUnzip2]
 
 
 Authors
 -----------
-Written by [Brian Taber](https://github.com/DaSpawn) [![DaSpawn's Gratipay][gratipay-image-daspawn]][gratipay-url-daspawn]
+Written by [Brian Taber](https://github.com/DaSpawn) 
+
+[![DaSpawn's Gratipay][gratipay-image-daspawn]][gratipay-url-daspawn]
 
 
 License
