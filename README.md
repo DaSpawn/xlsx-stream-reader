@@ -57,12 +57,12 @@ fs.createReadStream(fileName).pipe(workBookReader);
 ```
 
 
-Please Note
+Beta Warning
 -------
 This module is currently in use on a live internal business system for product 
 management. That being said this should still be considered beta. More usage 
 and input from users will be needed due to the numerous differences/incompatibilities/flukes 
-I have already run into.
+I have already run into with XLSX files.
 
 
 Limitations
@@ -94,6 +94,15 @@ Theoretically you could process an excel sheet as it is being uploaded, dependin
 on the sheet type, but untried (I encountered some XLSX files that have a different 
 zip format that requires having the entire file to read the archive contents properly), 
 but still probably better to save temp first and read streasm from there.
+
+Currently if the zip archive does not have the shared strings at the begining of the 
+archive an error will be thrown.  This will be solved by piping the input stream for 
+each sheet into a temp file untill the shared string are encountered and processed, 
+then re-read the temp worksheets processing in the shared strings.  This allows me 
+to keep the input as piped streams, and still handle the situation with xlsx archives out 
+of order.  Since the sheets are normally much smaller than the entire archive/shared 
+strings table, the temp files should remain small and compressed, but all of this 
+will be seamless/automatic
 
 
 API Information
