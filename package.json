@@ -1,6 +1,6 @@
 {
   "name": "xlsx-stream-reader",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Memory efficinet non-blocking/event based streaming XLSX reader",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/daspawn/xlsx-stream-reader#readme",
   "dependencies": {
     "sax": "^1.1.5",
+    "temp": "^0.8.3",
     "unzip2": "^0.2.5"
   }
 }
