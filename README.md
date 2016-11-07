@@ -71,9 +71,10 @@ I have already run into with XLSX files.
 
 Limitations
 -------
-The row reader currently returns formulas and not stored values (if available). 
-As time permits the row handler will be more capable but was enough for currrent 
-purposes (loading values from large worksheets fast)
+The row reader currently returns stored values for formulas (these are normally available)
+and does not calculate the formula itself. As time permits the row handler will be more capable 
+but was enough for currrent purposes (loading values from large worksheets fast)
+ 
 
 
 Inspiration
@@ -100,13 +101,9 @@ zip format that requires having the entire file to read the archive contents pro
 but still probably better to save temp first and read streasm from there.
 
 Currently if the zip archive does not have the shared strings at the begining of the 
-archive an error will be thrown.  This will be solved by piping the input stream for 
-each sheet into a temp file untill the shared string are encountered and processed, 
-then re-read the temp worksheets processing in the shared strings.  This allows me 
-to keep the input as piped streams, and still handle the situation with xlsx archives out 
-of order.  Since the sheets are normally much smaller than the entire archive/shared 
-strings table, the temp files should remain small and compressed, but all of this 
-will be seamless/automatic
+archive then the input stream for each sheet is pied into a temp file until the shared 
+string are encountered and processed, then re-read the temp worksheets with the shared 
+strings. 
 
 
 API Information
