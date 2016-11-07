@@ -180,6 +180,7 @@ Used Modules
 * [Stream][modStream]
 * [Sax][modSax]
 * [Unzip2][modUnzip2]
+* [Temp][modTemp]
 
 
 Authors
@@ -206,3 +207,4 @@ License
 [modUtil]: https://nodejs.org/api/util.html
 [modSax]: https://github.com/isaacs/sax-js
 [modUnzip2]: https://github.com/glebdmitriew/node-unzip-2
+[modTemp]: https://github.com/bruce/node-temp
