@@ -156,10 +156,11 @@ available via {Number} `workSheetReader.rowCount`
 * `row` {Object} Row object
 
 Emmitted on every row encountered in the worksheet. for more details on what 
-is in the row object, see the [Row class][msdnRows] on MSDN.  
+is in the row object attributes, see the [Row class][msdnRows] on MSDN.  
 
 For example:
 * `row.values`: sparse array containing all cell values
+* `row.formulas`: sparse array containing all cell formulas
 * `row.attributes.r`: row index
 * `row.attributes.ht`: Row height measured in point size
 * `row.attributes.customFormat`: '1' if the row style should be applied.
