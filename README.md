@@ -32,6 +32,9 @@ workBookReader.on('worksheet', function (workSheetReader) {
         workSheetReader.skip();
         return; 
     }
+    // print worksheet name
+    console.log(workSheetReader.name);
+
     // if we do not listen for rows we will only get end event
     // and have infor about the sheet like row count
     workSheetReader.on('row', function (row) {
