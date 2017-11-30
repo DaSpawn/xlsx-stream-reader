@@ -4,7 +4,7 @@
   "description": "Memory efficinet non-blocking/event based streaming XLSX reader",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test"
+    "test": "mocha --timeout 20000 test"
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,8 @@
     "sax": "^1.1.5",
     "temp": "^0.8.3",
     "unzip2": "^0.2.5"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1"
   }
 }
