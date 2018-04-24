@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-const fileName = path.resolve(__dirname, 'example4.xlsx')
+// const fileName = path.resolve(__dirname, 'example4.xlsx')
+const fileName = path.resolve(__dirname, 'example5.xlsx')
 
 const XlsxStreamReader = require('../index');
 
@@ -21,8 +22,6 @@ workBookReader.on('worksheet', function (workSheetReader) {
         workSheetReader.skip();
         return; 
     }
-    // print worksheet name
-    console.log(workSheetReader.name);
 
     // if we do not listen for rows we will only get end event
     // and have infor about the sheet like row count
