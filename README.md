@@ -4,8 +4,10 @@
 Memory efficinet minimalist streaming XLSX reader that can handle piped 
 streams as input. Events are emmited while reading the stream.
 
-
 Example
+
+More examples can be found if `example` folder
+
 -------
 ```javascript
 const XlsxStreamReader = require("xlsx-stream-reader");
