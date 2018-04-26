@@ -6,7 +6,11 @@ const fileName = path.resolve(__dirname, 'example5.xlsx')
 
 const XlsxStreamReader = require('../index');
 
-var workBookReader = new XlsxStreamReader();
+var workBookReader = new XlsxStreamReader({
+    verbose: false,
+    formatting: true
+});
+
 workBookReader.on('error', function (error) {
     throw(error);
 });

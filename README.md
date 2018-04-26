@@ -4,8 +4,24 @@
 Memory efficinet minimalist streaming XLSX reader that can handle piped 
 streams as input. Events are emmited while reading the stream.
 
-
 Example
+
+More examples can be found if `example` folder
+
+```javascript
+    var stream = new XlsxStreamReader({
+        verbose: false,
+        formatting: false
+    })
+```
+
+Options
+
+|Key|Default Value|Description|
+|---|---|---|
+|verbose|true|throw additional exceptions, if `false` - then pass empty string in that places|
+|formatting|true|should cells with combined formats be formatted or not|
+
 -------
 ```javascript
 const XlsxStreamReader = require("xlsx-stream-reader");
