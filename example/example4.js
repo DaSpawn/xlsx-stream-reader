@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-// const fileName = path.resolve(__dirname, 'example4.xlsx')
-const fileName = path.resolve(__dirname, 'example5.xlsx')
+const fileName = path.resolve(__dirname, 'example4.xlsx')
+// const fileName = path.resolve(__dirname, 'example5.xlsx')
 
 const XlsxStreamReader = require('../index');
 
