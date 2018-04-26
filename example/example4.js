@@ -21,11 +21,11 @@ workBookReader.on('sharedStrings', function () {
 });
 
 workBookReader.on('worksheet', function (workSheetReader) {
-    if (workSheetReader.id > 1){
-        // we only want first sheet
-        workSheetReader.skip();
-        return; 
-    }
+    // if (workSheetReader.id > 1){
+    //     // we only want first sheet
+    //     workSheetReader.skip();
+    //     return; 
+    // }
 
     // if we do not listen for rows we will only get end event
     // and have infor about the sheet like row count
