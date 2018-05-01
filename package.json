@@ -28,7 +28,7 @@
   "dependencies": {
     "sax": "^1.2.4",
     "temp": "^0.8.3",
-    "unzip2": "^0.2.5"
+    "unzipper": "^0.8.13"
   },
   "devDependencies": {
     "mocha": "^4.0.1"

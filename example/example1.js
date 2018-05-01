@@ -44,4 +44,4 @@ workBookReader.on('end', function () {
     console.log("finished!")
 });
 
-fs.createReadStream('example1.xlsx').pipe(workBookReader);
+fs.createReadStream('example/example1.xlsx').pipe(workBookReader);
