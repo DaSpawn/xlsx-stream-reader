@@ -4,6 +4,6 @@
  * MIT Licensed
  */
 
-'use strict';
+'use strict'
 
-module.exports = require('./lib/xlsx-stream-reader');
+module.exports = require('./lib/xlsx-stream-reader')
