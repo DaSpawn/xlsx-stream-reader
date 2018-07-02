@@ -17,6 +17,20 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
+  it.only('parses dates', function (done) {
+    var workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'import.xlsx')).pipe(workBookReader)
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert(workSheetReader.rowCount === 80000)
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        console.log(r)
+      })
+      workSheetReader.process()
+    })
+  })
   it('catches zip format errors', function (done) {
     var workBookReader = new XlsxStreamReader()
     fs.createReadStream(path.join(__dirname, 'notanxlsx')).pipe(workBookReader)

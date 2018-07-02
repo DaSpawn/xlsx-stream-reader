@@ -1,6 +1,6 @@
 {
   "name": "xlsx-stream-reader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Memory efficinet non-blocking/event based streaming XLSX reader",
   "main": "index.js",
   "scripts": {
