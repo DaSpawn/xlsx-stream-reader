@@ -17,7 +17,7 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
-  it('parses dates', function (done) {
+  it('formats dates', function (done) {
     var workBookReader = new XlsxStreamReader()
     fs.createReadStream(path.join(__dirname, 'import.xlsx')).pipe(workBookReader)
     const rows = []
