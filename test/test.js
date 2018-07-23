@@ -17,7 +17,23 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
-  it('formats dates', function (done) {
+  it('supports predefined formats', function (done) {
+    var workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'predefined_formats.xlsx')).pipe(workBookReader)
+    const rows = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert(rows[1][4] === '9/27/86')
+        assert(rows[1][8] === '20064')
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
+  it('supports custom formats', function (done) {
     var workBookReader = new XlsxStreamReader()
     fs.createReadStream(path.join(__dirname, 'import.xlsx')).pipe(workBookReader)
     const rows = []
