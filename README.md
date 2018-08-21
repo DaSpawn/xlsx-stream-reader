@@ -24,6 +24,7 @@ Options
 |---|---|---|
 |verbose|true|throw additional exceptions, if `false` - then pass empty string in that places|
 |formatting|true|should cells with combined formats be formatted or not|
+|saxTrim|true|whether or not to trim text and comment nodes|
 
 -------
 ```javascript
