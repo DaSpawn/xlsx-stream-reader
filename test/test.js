@@ -72,4 +72,19 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
+  it('support rich-text', function (done) {
+    const workBookReader = new XlsxStreamReader({saxTrim: false})
+    fs.createReadStream(path.join(__dirname, 'richtext.xlsx')).pipe(workBookReader)
+    const rows = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert(rows[0][1] === 'This is only one sentence.')
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
 })
