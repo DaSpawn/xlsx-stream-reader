@@ -78,7 +78,8 @@ describe('The xslx stream parser', function () {
     const rows = []
     workBookReader.on('worksheet', function (workSheetReader) {
       workSheetReader.on('end', function () {
-        assert(rows[0][1] === 'This is only one sentence.')
+        assert(rows[0][2] === 'B cell')
+        assert(rows[0][3] === 'C cell')
         done()
       })
       workSheetReader.on('row', function (r) {
