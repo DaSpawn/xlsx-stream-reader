@@ -57,4 +57,19 @@ describe('The xslx stream parser', function () {
       done()
     })
   })
+  it('parses a file with no number format ids', function (done) {
+    const workBookReader = new XlsxStreamReader()
+    const rows = []
+    fs.createReadStream(path.join(__dirname, 'nonumfmt.xlsx')).pipe(workBookReader)
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert(rows[1][1] === 'lambrate')
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
 })
