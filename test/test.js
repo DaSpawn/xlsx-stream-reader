@@ -6,6 +6,22 @@ const assert = require('assert')
 const path = require('path')
 
 describe('The xslx stream parser', function () {
+  it.only('makes formats available', function (done) {
+    var workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'predefined_formats.xlsx')).pipe(workBookReader)
+    const rows = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        console.log(r)
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
+
   it('parses large files', function (done) {
     var workBookReader = new XlsxStreamReader()
     fs.createReadStream(path.join(__dirname, 'big.xlsx')).pipe(workBookReader)
