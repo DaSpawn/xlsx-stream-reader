@@ -6,12 +6,13 @@ const assert = require('assert')
 const path = require('path')
 
 describe('The xslx stream parser', function () {
-  it.only('makes formats available', function (done) {
+/*   it('makes formats available', function (done) {
     var workBookReader = new XlsxStreamReader()
     fs.createReadStream(path.join(__dirname, 'predefined_formats.xlsx')).pipe(workBookReader)
     const rows = []
     workBookReader.on('worksheet', function (workSheetReader) {
       workSheetReader.on('end', function () {
+        console.log(rows)
         done()
       })
       workSheetReader.on('row', function (r) {
@@ -20,7 +21,7 @@ describe('The xslx stream parser', function () {
       })
       workSheetReader.process()
     })
-  })
+  }) */
 
   it('parses large files', function (done) {
     var workBookReader = new XlsxStreamReader()
@@ -35,6 +36,7 @@ describe('The xslx stream parser', function () {
   })
   it('supports predefined formats', function (done) {
     var workBookReader = new XlsxStreamReader()
+    const formats = []
     fs.createReadStream(path.join(__dirname, 'predefined_formats.xlsx')).pipe(workBookReader)
     const rows = []
     workBookReader.on('worksheet', function (workSheetReader) {
@@ -44,6 +46,7 @@ describe('The xslx stream parser', function () {
         done()
       })
       workSheetReader.on('row', function (r) {
+        formats.push(r.formats)
         rows.push(r.values)
       })
       workSheetReader.process()
@@ -83,6 +86,45 @@ describe('The xslx stream parser', function () {
         done()
       })
       workSheetReader.on('row', function (r) {
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
+  it('optionally returns predefined cell format', (done) => {
+    var workBookReader = new XlsxStreamReader({ returnFormats: true })
+    const formats = []
+    fs.createReadStream(path.join(__dirname, 'predefined_formats.xlsx')).pipe(workBookReader)
+    const rows = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert(rows[1][4] === '9/27/86')
+        assert(formats[1][4] === 'm/d/yy')
+        assert(formats[1][8] === 'General')
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        formats.push(r.formats)
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
+  it('optionally returns custom cell formats', function (done) {
+    var workBookReader = new XlsxStreamReader({ returnFormats: true })
+    fs.createReadStream(path.join(__dirname, 'import.xlsx')).pipe(workBookReader)
+    const rows = []
+    const formats = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert(rows[1][2] === '27/09/1986')
+        assert(rows[1][3] === '20064')
+        assert(formats[1][2] === 'DD/MM/YYYY')
+        assert(formats[1][3] === 'General')
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        formats.push(r.formats)
         rows.push(r.values)
       })
       workSheetReader.process()
