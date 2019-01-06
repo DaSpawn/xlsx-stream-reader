@@ -6,23 +6,6 @@ const assert = require('assert')
 const path = require('path')
 
 describe('The xslx stream parser', function () {
-/*   it('makes formats available', function (done) {
-    var workBookReader = new XlsxStreamReader()
-    fs.createReadStream(path.join(__dirname, 'predefined_formats.xlsx')).pipe(workBookReader)
-    const rows = []
-    workBookReader.on('worksheet', function (workSheetReader) {
-      workSheetReader.on('end', function () {
-        console.log(rows)
-        done()
-      })
-      workSheetReader.on('row', function (r) {
-        console.log(r)
-        rows.push(r.values)
-      })
-      workSheetReader.process()
-    })
-  }) */
-
   it('parses large files', function (done) {
     var workBookReader = new XlsxStreamReader()
     fs.createReadStream(path.join(__dirname, 'big.xlsx')).pipe(workBookReader)
@@ -36,7 +19,6 @@ describe('The xslx stream parser', function () {
   })
   it('supports predefined formats', function (done) {
     var workBookReader = new XlsxStreamReader()
-    const formats = []
     fs.createReadStream(path.join(__dirname, 'predefined_formats.xlsx')).pipe(workBookReader)
     const rows = []
     workBookReader.on('worksheet', function (workSheetReader) {
@@ -46,7 +28,6 @@ describe('The xslx stream parser', function () {
         done()
       })
       workSheetReader.on('row', function (r) {
-        formats.push(r.formats)
         rows.push(r.values)
       })
       workSheetReader.process()

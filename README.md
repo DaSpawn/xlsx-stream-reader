@@ -24,7 +24,7 @@ Options
 |---|---|---|
 |verbose|true|throw additional exceptions, if `false` - then pass empty string in that places|
 |formatting|true|should cells with combined formats be formatted or not|
-
+|returnFormats|false|should formats be returned alongside values|
 -------
 ```javascript
 const XlsxStreamReader = require("xlsx-stream-reader");
