@@ -72,4 +72,20 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
+  it('support rich-text', function (done) {
+    const workBookReader = new XlsxStreamReader({saxTrim: false})
+    fs.createReadStream(path.join(__dirname, 'richtext.xlsx')).pipe(workBookReader)
+    const rows = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert(rows[0][2] === 'B cell')
+        assert(rows[0][3] === 'C cell')
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
 })
