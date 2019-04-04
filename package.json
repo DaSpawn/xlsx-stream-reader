@@ -29,7 +29,7 @@
   "dependencies": {
     "sax": "^1.2.4",
     "ssf": "^0.10.2",
-    "temp": "^0.8.3",
+    "tmp": "^0.1.0",
     "unzipper": "^0.8.13"
   },
   "devDependencies": {
