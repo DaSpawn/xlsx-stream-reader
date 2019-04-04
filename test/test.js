@@ -72,6 +72,21 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
+  it('parses two files in parallel', done => {
+    const file1 = 'import.xlsx'
+    const file2 = 'file_with_2_sheets.xlsx'
+    let finishedStreamCount = 0
+    const endStream = function () {
+      finishedStreamCount++
+
+      if (finishedStreamCount === 2) {
+        done()
+      }
+    }
+
+    fs.createReadStream(path.join(__dirname, file1)).pipe(consumeXlsxFile(endStream))
+    fs.createReadStream(path.join(__dirname, file2)).pipe(consumeXlsxFile(endStream))
+  })
   it('support rich-text', function (done) {
     const workBookReader = new XlsxStreamReader({saxTrim: false})
     fs.createReadStream(path.join(__dirname, 'richtext.xlsx')).pipe(workBookReader)
@@ -89,3 +104,10 @@ describe('The xslx stream parser', function () {
     })
   })
 })
+
+function consumeXlsxFile (cb) {
+  const workBookReader = new XlsxStreamReader()
+  workBookReader.on('worksheet', sheet => sheet.process())
+  workBookReader.on('end', cb)
+  return workBookReader
+}
