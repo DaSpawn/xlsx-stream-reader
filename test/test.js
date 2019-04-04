@@ -88,7 +88,7 @@ describe('The xslx stream parser', function () {
     fs.createReadStream(path.join(__dirname, file2)).pipe(consumeXlsxFile(endStream))
   })
   it('support rich-text', function (done) {
-    const workBookReader = new XlsxStreamReader({saxTrim: false})
+    const workBookReader = new XlsxStreamReader({ saxTrim: false })
     fs.createReadStream(path.join(__dirname, 'richtext.xlsx')).pipe(workBookReader)
     const rows = []
     workBookReader.on('worksheet', function (workSheetReader) {
