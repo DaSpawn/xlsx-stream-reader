@@ -49,6 +49,21 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
+  it('supports date formate 1904', function (done) {
+    var workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'date1904.xlsx')).pipe(workBookReader)
+    const rows = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert(rows[1][2] === '27/09/1986')
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
   it('catches zip format errors', function (done) {
     var workBookReader = new XlsxStreamReader()
     fs.createReadStream(path.join(__dirname, 'notanxlsx')).pipe(workBookReader)
