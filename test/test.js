@@ -103,6 +103,22 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
+  it('parse 0 as 0', function (done) {
+    const workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'issue_44_empty_0.xlsx')).pipe(workBookReader)
+    const rows = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert.strictEqual(rows[1][1], 0)
+        assert.strictEqual(rows[1][2], 1)
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+  })
 })
 
 function consumeXlsxFile (cb) {
