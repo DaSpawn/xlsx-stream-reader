@@ -103,6 +103,28 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
+  it('parses a file having uppercase in sheet name and mixed first node', function (done) {
+    const workBookReader = new XlsxStreamReader()
+    const rows = []
+    fs.createReadStream(path.join(__dirname, 'uppercase_sheet_name.xlsx')).pipe(workBookReader)
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('end', function () {
+        assert.strictEqual(rows.length, 24)
+        assert.deepStrictEqual(
+          rows[0].slice(1),
+          ['Category ID', 'Parent category ID', 'Name DE', 'Name FR', 'Name IT', 'Name EN', 'GS1 ID']
+        )
+        done()
+      })
+      workSheetReader.on('row', function (r) {
+        rows.push(r.values)
+      })
+      workSheetReader.process()
+    })
+    workBookReader.on('end', function () {
+      rows.length || done(new Error('Read nothing'))
+    })
+  })
 })
 
 function consumeXlsxFile (cb) {
