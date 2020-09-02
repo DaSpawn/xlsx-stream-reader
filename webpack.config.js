@@ -7,6 +7,6 @@ module.exports = {
     fs: require('fs')
   },
   output: {
-    filename: 'xlsx-stream-reader.bundle.js'       
+    filename: 'xlsx-stream-reader.bundle.js'
   }
-};
+}
